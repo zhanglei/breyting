@@ -13,8 +13,9 @@ have to be restarted after changing the set of pages to be monitored.
 installation
 ------------
 
-    $ go get github.com/mewkiz/breyting
-    $ go install github.com/mewkiz/breyting/cmd/breyting
+    $ go get github.com/mewkiz/breyting/cmd/breyting
+    $ mkdir ~/.config/breyting
+    $ cp $GOPATH/github.com/mewkiz/breyting/breyting.ini ~/.config/breyting
 
 usage
 -----
