@@ -5,7 +5,7 @@ import "time"
 
 import "github.com/howeyc/fsnotify"
 import "github.com/mewkiz/breyting/download"
-import "github.com/mewkiz/ini"
+import "github.com/mewmew/ini"
 
 // activeDict is the active config file.
 var activeDict ini.Dict
