@@ -3,7 +3,7 @@ package conf
 import "container/list"
 import dbg "fmt"
 
-import "github.com/mewmew/breyting/download"
+import "github.com/mewkiz/breyting/download"
 
 /// ### [ todo ] ###
 ///   - There are still some bugs the addition and removal of active page

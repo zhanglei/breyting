@@ -6,9 +6,9 @@ import "exp/html"
 import "log"
 import "time"
 
+import "github.com/mewkiz/css"
 import "github.com/mewkiz/pkg/htmlutil"
 import "github.com/mewkiz/pkg/httputil"
-import "github.com/mewmew/css"
 
 // DefaultTimeout is the default timeout interval, which is used if no timeout
 // interval was specified in the config file.

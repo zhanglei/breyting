@@ -6,7 +6,7 @@ import "log"
 import "os"
 import "time"
 
-import "github.com/mewmew/breyting/conf"
+import "github.com/mewkiz/breyting/conf"
 
 // confPath is the path to the config file. The default is:
 //    $HOME/.config/breyting/breyting.ini

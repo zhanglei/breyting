@@ -4,8 +4,8 @@ import "log"
 import "time"
 
 import "github.com/howeyc/fsnotify"
-import "github.com/mewmew/breyting/download"
-import "github.com/mewmew/ini"
+import "github.com/mewkiz/breyting/download"
+import "github.com/mewkiz/ini"
 
 // activeDict is the active config file.
 var activeDict ini.Dict

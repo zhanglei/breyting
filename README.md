@@ -13,8 +13,8 @@ have to be restarted after changing the set of pages to be monitored.
 installation
 ------------
 
-    $ go get github.com/mewmew/breyting/cmd/breyting
-    $ go install github.com/mewmew/breyting/cmd/breyting
+    $ go get github.com/mewkiz/breyting
+    $ go install github.com/mewkiz/breyting/cmd/breyting
 
 usage
 -----
