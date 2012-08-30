@@ -14,8 +14,8 @@ installation
 ------------
 
     $ go get github.com/mewkiz/breyting/cmd/breyting
-    $ mkdir ~/.config/breyting
-    $ cp $GOPATH/github.com/mewkiz/breyting/breyting.ini ~/.config/breyting
+    $ mkdir -p ~/.config/breyting/
+    $ cp $GOPATH/src/github.com/mewkiz/breyting/breyting.ini ~/.config/breyting/
 
 usage
 -----
@@ -27,6 +27,7 @@ usage
 
 public domain
 -------------
+
 I hereby release this code into the *[public domain][]*.
 
 [public domain]: https://creativecommons.org/publicdomain/zero/1.0/
