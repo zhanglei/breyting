@@ -1,10 +1,12 @@
+// Package conf implements functions for watching config files and retrieving
+// relevant page download information.
 package conf
 
 import "log"
 import "time"
 
 import "github.com/howeyc/fsnotify"
-import "github.com/mewkiz/breyting/download"
+import "github.com/mewkiz/breyting/page"
 import "github.com/mewmew/ini"
 
 // activeDict is the active config file.
@@ -13,7 +15,7 @@ var activeDict ini.Dict
 // settingsSection is the name of the settings section.
 const settingsSection = ""
 
-// Reload reloads the config file, and adds a watcher to all new pages.
+// Reload reloads the config file and adds a watcher to all new pages.
 func Reload(confPath string) (err error) {
 	dict, err := ini.Load(confPath)
 	if err != nil {
@@ -23,13 +25,13 @@ func Reload(confPath string) (err error) {
 		if section == settingsSection {
 			rawTimeout, found := dict.GetString(settingsSection, "timeout")
 			if found {
-				download.Timeout, err = time.ParseDuration(rawTimeout)
+				page.Timeout, err = time.ParseDuration(rawTimeout)
 				if err != nil {
 					log.Println(err)
-					download.Timeout = download.DefaultTimeout
+					page.Timeout = page.DefaultTimeout
 				}
 			} else {
-				download.Timeout = download.DefaultTimeout
+				page.Timeout = page.DefaultTimeout
 			}
 			continue
 		}
@@ -41,20 +43,18 @@ func Reload(confPath string) (err error) {
 		}
 		if !active {
 			page := getPage(dict, section)
-			ListAdd(page)
 			go page.Watch()
 		}
 	}
 	activeDict = dict
 	// All active page watchers will justify their existance once every timeout
 	// interval. If no longer justified they will commit suicide.
-	ListCleanup()
 	return nil
 }
 
 // getPage returns the page of a given section in dict, or nil if no valid page
 // could be located.
-func getPage(dict ini.Dict, section string) (page *download.Page) {
+func getPage(dict ini.Dict, section string) (p *page.Page) {
 	if !isValidPageSection(dict, section) {
 		return nil
 	}
@@ -65,7 +65,11 @@ func getPage(dict ini.Dict, section string) (page *download.Page) {
 		/// ### [/ todo ] ###
 		rawSel = ""
 	}
-	return download.NewPage(section, rawSel)
+	p, err := page.New(section, rawSel)
+	if err != nil {
+		log.Fatalln(err) /// ### tmp ###
+	}
+	return p
 }
 
 // isValidPageSection returns true if the section is present and it isn't the
@@ -108,22 +112,9 @@ func Watch(confPath string) {
 				if ev.IsModify() {
 					Reload(confPath)
 				}
-			case err = <- watcher.Error:
+			case err = <-watcher.Error:
 				log.Println(err)
 			}
 		}
 	}
-}
-
-// isPageActive returns true if the page is active and false otherwise.
-func isPageActive(page *download.Page) bool {
-	for section := range activeDict {
-		activePage := getPage(activeDict, section)
-		if activePage != nil {
-			if page.Equal(activePage) {
-				return true
-			}
-		}
-	}
-	return false
 }

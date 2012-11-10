@@ -1,6 +1,6 @@
 package main
 
-///import dbg "fmt"
+import dbg "fmt"
 import "flag"
 import "log"
 import "os"
@@ -15,17 +15,20 @@ var confPath string
 func init() {
 	defaultConfPath := os.Getenv("HOME") + "/.config/breyting/breyting.ini"
 	flag.StringVar(&confPath, "conf", defaultConfPath, "Path to config file.")
-	flag.Parse()
 }
 
 func main() {
+	flag.Parse()
 	err := breyting()
 	if err != nil {
 		log.Fatalln(err)
 	}
 }
 
+// breyting loads the config file and adds a watcher to it. Each time the config
+// file is reloaded, it will spawn one watcher for each page.
 func breyting() (err error) {
+	dbg.Println("using:", confPath)
 	err = conf.Reload(confPath)
 	if err != nil {
 		return err
