@@ -1,6 +1,6 @@
 package page
 
-///import "github.com/mewmew/ini"
+///import "github.com/mewpkg/ini"
 
 ///var History ini.Dict
 
