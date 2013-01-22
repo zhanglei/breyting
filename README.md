@@ -10,20 +10,20 @@ have to be restarted after changing the set of pages to be monitored.
 
 [breyting]: https://en.wiktionary.org/wiki/breyting
 
-installation
+Installation
 ------------
 
-    $ go get github.com/mewkiz/breyting/cmd/breyting
-    $ mkdir -p ~/.config/breyting/
-    $ cp $GOPATH/src/github.com/mewkiz/breyting/breyting.ini ~/.config/breyting/
+	$ go get github.com/mewkiz/breyting/cmd/breyting
+	$ mkdir -p ~/.config/breyting/
+	$ cp $GOPATH/src/github.com/mewkiz/breyting/breyting.ini ~/.config/breyting/
 
-usage
------
+Examples
+--------
 
-    # Specify which pages (URL and CSS selector) to monitor in the config file.
+	# Specify which pages (URL and CSS selector) to monitor in the config file.
 
-    $ breyting -http=:4000
-    $ firefox http://localhost:4000
+	$ breyting -http=:4000
+	$ firefox http://localhost:4000
 
 public domain
 -------------
